@@ -7,22 +7,24 @@ namespace Chess.Domain.Tests
     public class PositionTests
     {
         [Theory]
-        [InlineData(0,0)]
-        [InlineData(7, 7)]
-        [InlineData(4, 5)]
-        public void Position_should_be_able_to_accept_valid_co_ordinates_on_chess_board(int row, int column)
+        [InlineData("A1")]
+        [InlineData("D5")]
+        [InlineData("H8")]
+        public void Position_should_be_able_to_accept_valid_co_ordinates_on_chess_board(string value)
         {
-            var position = new Position(row, column);
+            var position = new Position(value);
             position.Should().NotBeNull();
         }
         [Theory]
-        [InlineData(-1, 0)]
-        [InlineData(7, 8)]
-        [InlineData(0, 8)]
-        public void Position_should_throw_exception_for_invalid_co_ordinates_on_chess_board(int row, int column)
+        [InlineData("Z8")]
+        [InlineData("A9")]
+        [InlineData("S9")]
+        [InlineData("")]
+        [InlineData("H10")]
+        public void Position_should_throw_exception_for_invalid_co_ordinates_on_chess_board(string value)
         {
-            Action error = ()=> new Position(row, column);
-            Assert.Throws<ArgumentOutOfRangeException>(error);        
+            Action error = ()=> new Position(value);
+            Assert.ThrowsAny<Exception>(error);      
         }
     }
 }

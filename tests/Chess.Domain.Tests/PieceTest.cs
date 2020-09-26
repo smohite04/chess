@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -44,7 +45,24 @@ namespace Chess.Domain.Tests
             }
 
         }
-        
+        [Fact]
+        public void Pawn_given_valid_coordinates_should_move_to_valid_co_ordinates()
+        {
+            var pawn = new Pawn();
+            var initialPosition = new Position("A1");
+           var possibleOutcomes = pawn.GetPossiblePositions(initialPosition);
+            possibleOutcomes.Count.Should().Be(1);
+            var data = possibleOutcomes.Select(x => x.CellPosition).ToList();
+            data[0].Should().BeEquivalentTo("B1");
+        }
+        [Fact]
+        public void Pawn_given_valid_coordinates_when_it_is_last_cell_should_not_return_any_coordinates()
+        {
+            var pawn = new Pawn();
+            var initialPosition = new Position("H8");
+            var possibleOutcomes = pawn.GetPossiblePositions(initialPosition);
+            possibleOutcomes.Count.Should().Be(0);           
+        }
         public static IEnumerable<object[]> Data()
         {
            return new List<object[]> {
