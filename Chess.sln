@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chess.Domain", "src\Chess\Chess.Domain.csproj", "{4F5FF095-BEB7-4CC2-804E-EC29D1C9D11B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chess.Domain", "src\Chess.Domain\Chess.Domain.csproj", "{4F5FF095-BEB7-4CC2-804E-EC29D1C9D11B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{41E52AFA-FA0B-4FA5-8950-A53EE8C7D7FC}"
 EndProject
