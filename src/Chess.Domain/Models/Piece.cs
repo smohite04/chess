@@ -8,6 +8,6 @@ namespace Chess.Domain
     {
         public abstract string Name { get; }
 
-        public abstract List<Position> GetPossiblePositions(Position initialPosition);
+        public abstract List<Position> GetPossiblePositions(Position initialPosition,IDirection direction);
     }
 }

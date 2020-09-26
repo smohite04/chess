@@ -9,6 +9,12 @@ namespace Chess.Domain.Tests
 {
     public class PieceTest
     {
+        private readonly Direction _direction;
+
+        public PieceTest()
+        {
+           _direction =  new Direction(); 
+        }
         [Theory]
         [MemberData(nameof(Data))]
         public void Piece_should_have_name(ChessPieces chessPiece)
@@ -50,7 +56,7 @@ namespace Chess.Domain.Tests
         {
             var pawn = new Pawn();
             var initialPosition = new Position("A1");
-           var possibleOutcomes = pawn.GetPossiblePositions(initialPosition);
+           var possibleOutcomes = pawn.GetPossiblePositions(initialPosition, _direction);
             possibleOutcomes.Count.Should().Be(1);
             var data = possibleOutcomes.Select(x => x.CellPosition).ToList();
             data[0].Should().BeEquivalentTo("B1");
@@ -60,7 +66,7 @@ namespace Chess.Domain.Tests
         {
             var pawn = new Pawn();
             var initialPosition = new Position("H8");
-            var possibleOutcomes = pawn.GetPossiblePositions(initialPosition);
+            var possibleOutcomes = pawn.GetPossiblePositions(initialPosition, _direction);
             possibleOutcomes.Count.Should().Be(0);           
         }
         [Theory]
@@ -72,7 +78,7 @@ namespace Chess.Domain.Tests
         {
             var horse = new Horse();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = horse.GetPossiblePositions(initialPosition);
+            var possibleOutcomes = horse.GetPossiblePositions(initialPosition, _direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
@@ -87,7 +93,7 @@ namespace Chess.Domain.Tests
         {
             var king = new King();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = king.GetPossiblePositions(initialPosition);
+            var possibleOutcomes = king.GetPossiblePositions(initialPosition, _direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
@@ -101,7 +107,7 @@ namespace Chess.Domain.Tests
         {
             var queen = new Queen();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = queen.GetPossiblePositions(initialPosition);
+            var possibleOutcomes = queen.GetPossiblePositions(initialPosition, _direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
@@ -115,7 +121,7 @@ namespace Chess.Domain.Tests
         {
             var rook = new Rook();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = rook.GetPossiblePositions(initialPosition);
+            var possibleOutcomes = rook.GetPossiblePositions(initialPosition, _direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
@@ -129,7 +135,7 @@ namespace Chess.Domain.Tests
         {
             var bishop = new Bishop();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = bishop.GetPossiblePositions(initialPosition);
+            var possibleOutcomes = bishop.GetPossiblePositions(initialPosition, _direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);

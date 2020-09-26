@@ -11,10 +11,9 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        public override List<Position> GetPossiblePositions(Position initialPosition)
+        public override List<Position> GetPossiblePositions(Position initialPosition, IDirection direction)
         {
             var possibleOutcomes = new List<Position>();
-            var direction = new Direction();           
             possibleOutcomes.AddRange(direction.GetNorthEastPositions(initialPosition, Constants.ChessBoardUpperLimit));
             possibleOutcomes.AddRange(direction.GetNorthWestPositions(initialPosition, Constants.ChessBoardUpperLimit));
             possibleOutcomes.AddRange(direction.GetSouthEastPositions(initialPosition, Constants.ChessBoardUpperLimit));

@@ -13,12 +13,12 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        public override List<Position> GetPossiblePositions(Position initialPosition)
+        public override List<Position> GetPossiblePositions(Position initialPosition, IDirection direction)
         {
            
             var possibleOutcomes = new List<Position>();
-            var horizontalMovements = GetHorizontalTwoAndHalfMovements(initialPosition);
-            var verticalMovements = GetVerticalTwoAndHalfMovements(initialPosition);
+            var horizontalMovements = GetHorizontalTwoAndHalfMovements(initialPosition, direction);
+            var verticalMovements = GetVerticalTwoAndHalfMovements(initialPosition, direction);
             possibleOutcomes.AddRange(horizontalMovements);
             possibleOutcomes.AddRange(verticalMovements);
             return possibleOutcomes;
@@ -30,9 +30,8 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        private List<Position> GetHorizontalTwoAndHalfMovements(Position initialPosition)
+        private List<Position> GetHorizontalTwoAndHalfMovements(Position initialPosition, IDirection direction)
         {
-            var direction = new Direction();
             var verticalPositions = new List<Position>();
             var northIndex = initialPosition.Row + 2;
             if (northIndex.IsValidMovement() == true)
@@ -59,7 +58,7 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        private List<Position> GetVerticalTwoAndHalfMovements(Position initialPosition)
+        private List<Position> GetVerticalTwoAndHalfMovements(Position initialPosition, IDirection direction)
         {
      
             var horizontalPositions = new List<Position>();
@@ -76,7 +75,6 @@ namespace Chess.Domain
             var verticalMovements = new List<Position>();
             horizontalPositions.ForEach(x =>
             {
-                var direction = new Direction();
                 verticalMovements.AddRange(direction.GetNorthPositions(x, 1));
                 verticalMovements.AddRange(direction.GetSouthPositions(x, 1));
             });

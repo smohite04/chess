@@ -11,11 +11,9 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        public override List<Position> GetPossiblePositions(Position initialPosition)
+        public override List<Position> GetPossiblePositions(Position initialPosition, IDirection direction)
         {
-            var direction = new Direction();
-            var possibleOutcomes = direction.GetNorthPositions(initialPosition, 1);
-            return possibleOutcomes;
+           return direction.GetNorthPositions(initialPosition, 1);
         }
     }
 }
