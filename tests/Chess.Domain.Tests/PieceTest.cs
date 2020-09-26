@@ -63,6 +63,21 @@ namespace Chess.Domain.Tests
             var possibleOutcomes = pawn.GetPossiblePositions(initialPosition);
             possibleOutcomes.Count.Should().Be(0);           
         }
+        [Theory]
+        [InlineData("E3", 8, "G2,G4,F5,D5,C4,C2,D1,F1")]
+        [InlineData("A1", 2, "B3,C2")]
+        [InlineData("H8", 2, "F7,G6")]
+        [InlineData("H1", 2, "F2,G3")]
+        public void Horse_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
+        {
+            var horse = new Horse();
+            var initialPosition = new Position(initialCellPosition);
+            var possibleOutcomes = horse.GetPossiblePositions(initialPosition);
+            possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
+            var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
+            var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            positions.Should().Contain(expectedPossibleOutcomes);
+        }
         public static IEnumerable<object[]> Data()
         {
            return new List<object[]> {

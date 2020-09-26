@@ -22,13 +22,13 @@ namespace Chess.Domain
             if (cellPosition.Length > 2)
                 throw new ArgumentException($"The {propertyName}'s value should be contain only 2 charachers. Class : {className} and method : {methodName}.");
         }
-        public static bool IsValidMovement(this int value, int upperLimit)
+        public static bool IsValidMovement(this int value)
         {
-            if (value >= upperLimit)
+            if (value >= 0 && value < Constants.ChessBoardUpperLimit)
             {
-                return false;
-            }
-            return true;
+                return true;
+            }          
+            return false;
         }
     }
 }

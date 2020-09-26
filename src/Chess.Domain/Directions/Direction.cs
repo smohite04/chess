@@ -18,10 +18,10 @@ namespace Chess.Domain
                 for (var index = 1; index <= maxMovementLimit; index++)
                 {
                     var nextposition = initialPosition.Column + index;
-                    if (nextposition.IsValidMovement(Constants.ChessBoardUpperLimit) == false)
+                    if (nextposition.IsValidMovement() == false)
                         break;
 
-                    positions.Add(new Position(initialPosition.Row, initialPosition.Column + index));
+                    positions.Add(new Position(initialPosition.Row, nextposition));
                 }                      
             return positions;
         }
@@ -42,7 +42,7 @@ namespace Chess.Domain
             for (var index = 1; index <= maxMovementLimit; index++)
             {
                 var nextposition = initialPosition.Row + index;
-                if (nextposition.IsValidMovement(Constants.ChessBoardUpperLimit) == false)
+                if (nextposition.IsValidMovement() == false)
                     break;
 
                 positions.Add(new Position(nextposition, initialPosition.Column));
@@ -67,7 +67,16 @@ namespace Chess.Domain
         /// <returns></returns>
         public List<Position> GetSouthPositions(Position initialPosition, uint maxMovementLimit)
         {
-            throw new NotImplementedException();
+            var positions = new List<Position>();
+            for (var index = 1; index <= maxMovementLimit; index++)
+            {
+                var nextposition = initialPosition.Row - index;
+                if (nextposition.IsValidMovement() == false)
+                    break;
+
+                positions.Add(new Position(nextposition, initialPosition.Column));
+            }
+            return positions;
         }
 
         public List<Position> GetSouthWestPositions(Position initialPosition, uint maxMovementLimit)
@@ -82,7 +91,16 @@ namespace Chess.Domain
         /// <returns></returns>
         public List<Position> GetWestPositions(Position initialPosition, uint maxMovementLimit)
         {
-            throw new NotImplementedException();
+            var positions = new List<Position>();
+            for (var index = 1; index <= maxMovementLimit; index++)
+            {
+                var nextposition = initialPosition.Column - index;
+                if (nextposition.IsValidMovement() == false)
+                    break;
+
+                positions.Add(new Position(initialPosition.Row, nextposition));
+            }
+            return positions;
         }
     }
 }
