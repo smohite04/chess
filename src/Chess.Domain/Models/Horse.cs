@@ -7,7 +7,12 @@ namespace Chess.Domain
     public class Horse : Piece
     {
         public override string Name => ChessPieces.Horse.ToString();
-
+        /// <summary>
+        /// This gives posible movements of horse.
+        ///Horse can move across the board only in 2.5 steps (2 vertical steps and 1 horizontal step)
+        /// </summary>
+        /// <param name="initialPosition"></param>
+        /// <returns></returns>
         public override List<Position> GetPossiblePositions(Position initialPosition)
         {
            

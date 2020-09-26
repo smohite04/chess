@@ -28,7 +28,18 @@ namespace Chess.Domain
 
         public List<Position> GetNorthEastPositions(Position initialPosition, uint maxMovementLimit=0)
         {
-            throw new NotImplementedException();
+            var positions = new List<Position>();
+            for (var index = 1; index <= maxMovementLimit; index++)
+            {
+                var nextRowposition = initialPosition.Row + index;
+                if (nextRowposition.IsValidMovement() == false)
+                    break;
+                var nextColumnposition = initialPosition.Column + index;
+                if (nextColumnposition.IsValidMovement() == false)
+                    break;
+                positions.Add(new Position(nextRowposition, nextColumnposition));
+            }
+            return positions;
         }
         /// <summary>
         /// Going North means increase the row value 
@@ -52,12 +63,35 @@ namespace Chess.Domain
 
         public List<Position> GetNorthWestPositions(Position initialPosition, uint maxMovementLimit)
         {
-            throw new NotImplementedException();
+
+            var positions = new List<Position>();
+            for (var index = 1; index <= maxMovementLimit; index++)
+            {
+                var nextRowposition = initialPosition.Row + index;
+                if (nextRowposition.IsValidMovement() == false)
+                    break;
+                var nextColumnposition = initialPosition.Column - index;
+                if (nextColumnposition.IsValidMovement() == false)
+                    break;
+                positions.Add(new Position(nextRowposition, nextColumnposition));
+            }
+            return positions;
         }
 
         public List<Position> GetSouthEastPositions(Position initialPosition, uint maxMovementLimit)
         {
-            throw new NotImplementedException();
+            var positions = new List<Position>();
+            for (var index = 1; index <= maxMovementLimit; index++)
+            {
+                var nextRowposition = initialPosition.Row - index;
+                if (nextRowposition.IsValidMovement() == false)
+                    break;
+                var nextColumnposition = initialPosition.Column + index;
+                if (nextColumnposition.IsValidMovement() == false)
+                    break;
+                positions.Add(new Position(nextRowposition, nextColumnposition));
+            }
+            return positions;
         }
         /// <summary>
         /// Going South means decrease the row value 
@@ -81,7 +115,19 @@ namespace Chess.Domain
 
         public List<Position> GetSouthWestPositions(Position initialPosition, uint maxMovementLimit)
         {
-            throw new NotImplementedException();
+
+            var positions = new List<Position>();
+            for (var index = 1; index <= maxMovementLimit; index++)
+            {
+                var nextRowposition = initialPosition.Row - index;
+                if (nextRowposition.IsValidMovement() == false)
+                    break;
+                var nextColumnposition = initialPosition.Column - index;
+                if (nextColumnposition.IsValidMovement() == false)
+                    break;
+                positions.Add(new Position(nextRowposition, nextColumnposition));
+            }
+            return positions;
         }
         /// <summary>
         /// Going Wesr means decrease the column value 

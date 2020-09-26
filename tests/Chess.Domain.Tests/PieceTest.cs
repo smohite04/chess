@@ -78,6 +78,21 @@ namespace Chess.Domain.Tests
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
             positions.Should().Contain(expectedPossibleOutcomes);
         }
+        [Theory]
+        [InlineData("D5", 8, "E5,E6,D6,C6,C5,C4,D4,E4")]
+        [InlineData("A1", 3, "A2,B2,B1")]
+        [InlineData("H8", 3, "H7,G7,G8")]
+        [InlineData("G1", 5, "H1,H2,G2,F2,F1")]
+        public void King_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
+        {
+            var king = new King();
+            var initialPosition = new Position(initialCellPosition);
+            var possibleOutcomes = king.GetPossiblePositions(initialPosition);
+            possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
+            var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
+            var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            positions.Should().Contain(expectedPossibleOutcomes);
+        }
         public static IEnumerable<object[]> Data()
         {
            return new List<object[]> {
