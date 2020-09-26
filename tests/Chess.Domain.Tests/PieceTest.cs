@@ -93,6 +93,48 @@ namespace Chess.Domain.Tests
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
             positions.Should().Contain(expectedPossibleOutcomes);
         }
+        [Theory]
+        [InlineData("H1", 21, "H2,H3,H4,H5,H6,H7,H8,G1,F1,E1,D1,C1,B1,A1,G2,F3,E4,D5,C6,B7,A8")]
+        [InlineData("C4", 25, "A4,B4,D4,E4,F4,G4,H4,C1,C2,C3,C5,C6,C7,C8,A2,B3,D5,E6,F7,G8,F1,E2,D3,B5,A6")]
+        [InlineData("D4", 27, "A4,B4,C4,E4,F4,G4,H4,D1,D2,D3,D5,D6,D7,D8,A1,B2,C3,E5,F6,G7,H8,G1,F2,E3,C5,B6,A7")]
+        public void Queen_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
+        {
+            var queen = new Queen();
+            var initialPosition = new Position(initialCellPosition);
+            var possibleOutcomes = queen.GetPossiblePositions(initialPosition);
+            possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
+            var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
+            var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            positions.Should().Contain(expectedPossibleOutcomes);
+        }
+        [Theory]
+        [InlineData("H1", 14, "H2,H3,H4,H5,H6,H7,H8,G1,F1,E1,D1,C1,B1,A1")]
+        [InlineData("C4", 14, "A4,B4,D4,E4,F4,G4,H4,C1,C2,C3,C5,C6,C7,C8")]
+        [InlineData("D4", 14, "A4,B4,C4,E4,F4,G4,H4,D1,D2,D3,D5,D6,D7,D8")]
+        public void Rook_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
+        {
+            var rook = new Rook();
+            var initialPosition = new Position(initialCellPosition);
+            var possibleOutcomes = rook.GetPossiblePositions(initialPosition);
+            possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
+            var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
+            var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            positions.Should().Contain(expectedPossibleOutcomes);
+        }
+        [Theory]
+        [InlineData("H1", 7, "G2,F3,E4,D5,C6,B7,A8")]
+        [InlineData("C4", 11, "A2,B3,D5,E6,F7,G8,F1,E2,D3,B5,A6")]
+        [InlineData("D4", 13, "A1,B2,C3,E5,F6,G7,H8,G1,F2,E3,C5,B6,A7")]
+        public void Bishop_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
+        {
+            var bishop = new Bishop();
+            var initialPosition = new Position(initialCellPosition);
+            var possibleOutcomes = bishop.GetPossiblePositions(initialPosition);
+            possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
+            var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
+            var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            positions.Should().Contain(expectedPossibleOutcomes);
+        }
         public static IEnumerable<object[]> Data()
         {
            return new List<object[]> {

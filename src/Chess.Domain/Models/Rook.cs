@@ -8,7 +8,13 @@ namespace Chess.Domain
 
         public override List<Position> GetPossiblePositions(Position initialPosition)
         {
-            throw new System.NotImplementedException();
+            var possibleOutcomes = new List<Position>();
+            var direction = new Direction();
+            possibleOutcomes.AddRange(direction.GetEastPositions(initialPosition, Constants.ChessBoardUpperLimit));
+            possibleOutcomes.AddRange(direction.GetWestPositions(initialPosition, Constants.ChessBoardUpperLimit));
+            possibleOutcomes.AddRange(direction.GetNorthPositions(initialPosition, Constants.ChessBoardUpperLimit));
+            possibleOutcomes.AddRange(direction.GetSouthPositions(initialPosition, Constants.ChessBoardUpperLimit));           
+            return possibleOutcomes;
         }
     }
 }
