@@ -14,13 +14,11 @@ namespace Chess.Domain
         public Position(string cellPosition)
         {
             cellPosition.ShouldBeValid(nameof(cellPosition), nameof(Position), Constants.Constructor);
-            var values = cellPosition.ToCharArray();
+            var (row, column) = cellPosition.ToCellCoOrdinates();
 
-            var row = values[0].AlphabetToNumber();
             row.ShouldBeValidNumber(Constants.ChessBoardUpperLimit, nameof(row), nameof(Position), Constants.Constructor);
             this.Row = row;
 
-            var column = values[1].ToCellNumber();
             column.ShouldBeValidNumber(Constants.ChessBoardUpperLimit, nameof(column), nameof(Position), Constants.Constructor);
             this.Column = column;
 

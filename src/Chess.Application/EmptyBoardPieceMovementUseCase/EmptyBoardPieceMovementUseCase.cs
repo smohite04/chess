@@ -17,10 +17,17 @@ namespace Chess.Application
 
         public string Execute(string request)
         {
-            var requestData = request.ToChessPiecePositionRequest();
-            var piece = requestData.PieceName.ToChessPiece();
-            var outcomes = piece.GetPossiblePositions(new Position(requestData.InitialPosition), _direction);
-            return outcomes.ToResponse();
+            try
+            {
+                var requestData = request.ToChessPiecePositionRequest();
+                var piece = requestData.PieceName.ToChessPiece();
+                var outcomes = piece.GetPossiblePositions(new Position(requestData.InitialPosition), _direction);
+                return outcomes.ToResponse();
+            }
+            catch (Exception ex) when ((ex is BaseApplicationException) == false)
+            {
+                throw new SystemException("A system error occured. Please check the request and try again.");
+            }
         }
     }
 }

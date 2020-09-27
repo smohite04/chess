@@ -16,7 +16,8 @@ namespace Chess.Application
         public static ChessPiecePositionRequest ToChessPiecePositionRequest(this string value)
         {
             var requestData = value.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-           requestData.ShouldBeValidRequest();
+            requestData.ShouldBeValidRequest();
+            
             return new ChessPiecePositionRequest { InitialPosition = requestData[1], PieceName = requestData[0]};
 
         }

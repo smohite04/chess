@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Application", "src\Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Application.Tests", "tests\Chess.Application.Tests\Chess.Application.Tests.csproj", "{401A98AF-F3ED-4E78-ABD7-373BC549F8B2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{21C04273-7584-45B1-A764-EB3E3247230C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess.Host", "src\Chess.Host\Chess.Host.csproj", "{F8921F4F-8931-4988-9132-C23AA78108C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{401A98AF-F3ED-4E78-ABD7-373BC549F8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{401A98AF-F3ED-4E78-ABD7-373BC549F8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{401A98AF-F3ED-4E78-ABD7-373BC549F8B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8921F4F-8931-4988-9132-C23AA78108C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8921F4F-8931-4988-9132-C23AA78108C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8921F4F-8931-4988-9132-C23AA78108C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8921F4F-8931-4988-9132-C23AA78108C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{BA51A296-E7CD-45C7-AEBA-49179AD0CC87} = {D367669E-99C4-4813-AD91-3410D733AC87}
 		{13BC2C19-DA80-4B07-A870-4054DDB96B99} = {FC3F9CCB-371D-4725-A1E4-D6C65144DD8A}
 		{401A98AF-F3ED-4E78-ABD7-373BC549F8B2} = {D367669E-99C4-4813-AD91-3410D733AC87}
+		{F8921F4F-8931-4988-9132-C23AA78108C4} = {21C04273-7584-45B1-A764-EB3E3247230C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93C2D001-DBF0-4C02-930C-7BC06FE46814}

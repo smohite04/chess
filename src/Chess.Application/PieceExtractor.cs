@@ -19,7 +19,7 @@ namespace Chess.Application
         {
             var isValid = Enum.TryParse(pieceName, out ChessPieces chessPiece);
             if (isValid == false)
-                throw new InvalidCastException($"The piece type {pieceName} does not exist in the context of chase");
+                throw new BadRequestException($"The piece type {pieceName} does not exist in the context of chase");
 
             return _ChessPieceMappings[chessPiece];
         }
