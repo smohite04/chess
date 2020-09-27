@@ -4,6 +4,10 @@ namespace Chess.Domain
 {
     public class Bishop : Piece
     {
+        public Bishop(Position position) : base(position)
+        {
+        }
+
         public override string Name => ChessPieces.Bishop.ToString();
 
         /// <summary>
@@ -11,13 +15,13 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        public override List<Position> GetPossiblePositions(Position initialPosition, IDirection direction)
+        public override List<Position> GetPossiblePositions(IDirection direction)
         {
             var possibleOutcomes = new List<Position>();
-            possibleOutcomes.AddRange(direction.GetNorthEastPositions(initialPosition, Constants.ChessBoardUpperLimit));
-            possibleOutcomes.AddRange(direction.GetNorthWestPositions(initialPosition, Constants.ChessBoardUpperLimit));
-            possibleOutcomes.AddRange(direction.GetSouthEastPositions(initialPosition, Constants.ChessBoardUpperLimit));
-            possibleOutcomes.AddRange(direction.GetSouthWestPositions(initialPosition, Constants.ChessBoardUpperLimit));
+            possibleOutcomes.AddRange(direction.GetNorthEastPositions(CurrentPosition, Constants.ChessBoardUpperLimit));
+            possibleOutcomes.AddRange(direction.GetNorthWestPositions(CurrentPosition, Constants.ChessBoardUpperLimit));
+            possibleOutcomes.AddRange(direction.GetSouthEastPositions(CurrentPosition, Constants.ChessBoardUpperLimit));
+            possibleOutcomes.AddRange(direction.GetSouthWestPositions(CurrentPosition, Constants.ChessBoardUpperLimit));
             return possibleOutcomes;
         }
     }

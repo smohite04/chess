@@ -7,21 +7,35 @@ namespace Chess.Application
 {
     public static class PieceExtractor
     {
-        private static readonly Dictionary<ChessPieces, Piece> _ChessPieceMappings = new Dictionary<ChessPieces, Piece> {
-            { ChessPieces.Pawn,new Pawn()},
-            { ChessPieces.King,new King()},
-            { ChessPieces.Queen,new Queen()},
-            { ChessPieces.Rook,new Rook()},
-            { ChessPieces.Bishop,new Bishop()},
-            { ChessPieces.Horse,new Horse()},
-        };
-        public static Piece ToChessPiece(this string pieceName)
+        public static Piece ToChessPiece(this ChessPiecePositionRequest chessPiecePositionRequest)
         {
-            var isValid = Enum.TryParse(pieceName, out ChessPieces chessPiece);
+            var isValid = Enum.TryParse(chessPiecePositionRequest.PieceName, true, out ChessPieces chessPiece);
             if (isValid == false)
-                throw new BadRequestException($"The piece type {pieceName} does not exist in the context of chase");
+                throw new BadRequestException($"The piece type {chessPiecePositionRequest.PieceName} does not exist in the context of chase");
 
-            return _ChessPieceMappings[chessPiece];
+            var position = new Position(chessPiecePositionRequest.InitialPosition);
+            switch (chessPiece)
+            {
+                case ChessPieces.Pawn:
+                    return new Pawn(position);
+
+                case ChessPieces.King:
+                    return new King(position);
+
+                case ChessPieces.Queen:
+                    return new Queen(position);
+
+                case ChessPieces.Rook:
+                    return new Rook(position);
+
+                case ChessPieces.Bishop:
+                    return new Bishop(position);
+
+                case ChessPieces.Horse:
+                    return new Horse(position);
+                default:
+                    throw new InvalidCastException($"{chessPiece.ToString()} is not implemented.");
+            }
         }
     }
 }

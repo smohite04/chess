@@ -20,8 +20,8 @@ namespace Chess.Application
             try
             {
                 var requestData = request.ToChessPiecePositionRequest();
-                var piece = requestData.PieceName.ToChessPiece();
-                var outcomes = piece.GetPossiblePositions(new Position(requestData.InitialPosition), _direction);
+                var piece = requestData.ToChessPiece();
+                var outcomes = piece.GetPossiblePositions(_direction);
                 return outcomes.ToResponse();
             }
             catch (Exception ex) when ((ex is BaseApplicationException) == false)

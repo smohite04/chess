@@ -4,6 +4,10 @@ namespace Chess.Domain
 {
     public class Pawn : Piece
     {
+        public Pawn(Position position) : base(position)
+        {
+        }
+
         public override string Name => ChessPieces.Pawn.ToString();
 
         /// <summary>
@@ -11,9 +15,9 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        public override List<Position> GetPossiblePositions(Position initialPosition, IDirection direction)
+        public override List<Position> GetPossiblePositions(IDirection direction)
         {
-           return direction.GetNorthPositions(initialPosition, 1);
+           return direction.GetNorthPositions(CurrentPosition, 1);
         }
     }
 }

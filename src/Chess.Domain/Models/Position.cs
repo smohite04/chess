@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Chess.Domain
 {
@@ -43,5 +44,17 @@ namespace Chess.Domain
         public int Row { get; }
         public int Column { get; }
         public string CellPosition { get; }
+
+        public override bool Equals(object obj)
+        {
+            var position = obj as Position;
+            return position != null &&
+                   CellPosition.Equals(position.CellPosition, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public override int GetHashCode()
+        {
+            return -1692396822 + EqualityComparer<string>.Default.GetHashCode(CellPosition);
+        }
     }
 }

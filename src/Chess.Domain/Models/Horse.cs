@@ -6,6 +6,10 @@ namespace Chess.Domain
 {
     public class Horse : Piece
     {
+        public Horse(Position position) : base(position)
+        {
+        }
+
         public override string Name => ChessPieces.Horse.ToString();
         /// <summary>
         /// This gives posible movements of horse.
@@ -13,12 +17,12 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        public override List<Position> GetPossiblePositions(Position initialPosition, IDirection direction)
+        public override List<Position> GetPossiblePositions(IDirection direction)
         {
            
             var possibleOutcomes = new List<Position>();
-            var horizontalMovements = GetHorizontalTwoAndHalfMovements(initialPosition, direction);
-            var verticalMovements = GetVerticalTwoAndHalfMovements(initialPosition, direction);
+            var horizontalMovements = GetHorizontalTwoAndHalfMovements( direction);
+            var verticalMovements = GetVerticalTwoAndHalfMovements(direction);
             possibleOutcomes.AddRange(horizontalMovements);
             possibleOutcomes.AddRange(verticalMovements);
             return possibleOutcomes;
@@ -28,20 +32,19 @@ namespace Chess.Domain
         ///To calculate the horizontal movements of a horse, we need to go 2 cells north and south.
         ///For the valid vertical 2 cell movements, we can then go horizontal as a half location.
         /// </summary>
-        /// <param name="initialPosition"></param>
         /// <returns></returns>
-        private List<Position> GetHorizontalTwoAndHalfMovements(Position initialPosition, IDirection direction)
+        private List<Position> GetHorizontalTwoAndHalfMovements(IDirection direction)
         {
             var verticalPositions = new List<Position>();
-            var northIndex = initialPosition.Row + 2;
+            var northIndex = CurrentPosition.Row + 2;
             if (northIndex.IsValidMovement() == true)
             {
-                verticalPositions.Add(new Position(northIndex, initialPosition.Column));
+                verticalPositions.Add(new Position(northIndex, CurrentPosition.Column));
             }
-            var southIndex = initialPosition.Row - 2;
+            var southIndex = CurrentPosition.Row - 2;
             if (southIndex.IsValidMovement() == true)
             {
-                verticalPositions.Add(new Position(southIndex, initialPosition.Column));
+                verticalPositions.Add(new Position(southIndex, CurrentPosition.Column));
             }
             var horizontalMovements = new List<Position>();
             verticalPositions.ForEach(x =>
@@ -58,19 +61,19 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        private List<Position> GetVerticalTwoAndHalfMovements(Position initialPosition, IDirection direction)
+        private List<Position> GetVerticalTwoAndHalfMovements(IDirection direction)
         {
      
             var horizontalPositions = new List<Position>();
-            var eastIndex = initialPosition.Column + 2;
+            var eastIndex = CurrentPosition.Column + 2;
             if (eastIndex.IsValidMovement() == true)
             {
-                horizontalPositions.Add(new Position(initialPosition.Row, eastIndex));
+                horizontalPositions.Add(new Position(CurrentPosition.Row, eastIndex));
             }
-            var westIndex = initialPosition.Column - 2;
+            var westIndex = CurrentPosition.Column - 2;
             if (westIndex.IsValidMovement() == true)
             {
-                horizontalPositions.Add(new Position(initialPosition.Row, westIndex));
+                horizontalPositions.Add(new Position(CurrentPosition.Row, westIndex));
             }
             var verticalMovements = new List<Position>();
             horizontalPositions.ForEach(x =>

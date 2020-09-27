@@ -17,46 +17,53 @@ namespace Chess.Domain.Tests
         }
         [Theory]
         [MemberData(nameof(Data))]
-        public void Piece_should_have_name(ChessPieces chessPiece)
+        public void Piece_should_have_name_and_initial_position(ChessPieces chessPiece)
         {
+            var position = new Position("D5");
             if (chessPiece == ChessPieces.Horse)
             {
-                var horse = new Horse();
+                var horse = new Horse(position);
                 horse.Name.Should().BeEquivalentTo(chessPiece.ToString());
+                horse.CurrentPosition.Equals(position);
             }
             if (chessPiece == ChessPieces.Pawn)
             {
-                var pawn = new Pawn();
+                var pawn = new Pawn(position);
                 pawn.Name.Should().BeEquivalentTo(chessPiece.ToString());
+                pawn.CurrentPosition.Equals(position);
             }
             if (chessPiece == ChessPieces.Rook)
             {
-                var horse = new Rook();
+                var horse = new Rook(position);
                 horse.Name.Should().BeEquivalentTo(chessPiece.ToString());
+                horse.CurrentPosition.Equals(position);
             }
             if (chessPiece == ChessPieces.Bishop)
             {
-                var horse = new Bishop();
-                horse.Name.Should().BeEquivalentTo(chessPiece.ToString());
+                var bishop = new Bishop(position);
+                bishop.Name.Should().BeEquivalentTo(chessPiece.ToString());
+                bishop.CurrentPosition.Equals(position);
             }
             if (chessPiece == ChessPieces.King)
             {
-                var horse = new King();
-                horse.Name.Should().BeEquivalentTo(chessPiece.ToString());
+                var king = new King(position);
+                king.Name.Should().BeEquivalentTo(chessPiece.ToString());
+                king.CurrentPosition.Equals(position);
             }
             if (chessPiece == ChessPieces.Queen)
             {
-                var horse = new Queen();
-                horse.Name.Should().BeEquivalentTo(chessPiece.ToString());
+                var queen = new Queen(position);
+                queen.Name.Should().BeEquivalentTo(chessPiece.ToString());
+                queen.CurrentPosition.Equals(position);
             }
 
         }
         [Fact]
         public void Pawn_given_valid_coordinates_should_move_to_valid_co_ordinates()
-        {
-            var pawn = new Pawn();
+        {           
             var initialPosition = new Position("A1");
-           var possibleOutcomes = pawn.GetPossiblePositions(initialPosition, _direction);
+            var pawn = new Pawn(initialPosition);
+            var possibleOutcomes = pawn.GetPossiblePositions(_direction);
             possibleOutcomes.Count.Should().Be(1);
             var data = possibleOutcomes.Select(x => x.CellPosition).ToList();
             data[0].Should().BeEquivalentTo("B1");
@@ -64,9 +71,9 @@ namespace Chess.Domain.Tests
         [Fact]
         public void Pawn_given_valid_coordinates_when_it_is_last_cell_should_not_return_any_coordinates()
         {
-            var pawn = new Pawn();
             var initialPosition = new Position("H8");
-            var possibleOutcomes = pawn.GetPossiblePositions(initialPosition, _direction);
+            var pawn = new Pawn(initialPosition);          
+            var possibleOutcomes = pawn.GetPossiblePositions(_direction);
             possibleOutcomes.Count.Should().Be(0);           
         }
         [Theory]
@@ -76,9 +83,9 @@ namespace Chess.Domain.Tests
         [InlineData("H1", 2, "F2,G3")]
         public void Horse_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
         {
-            var horse = new Horse();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = horse.GetPossiblePositions(initialPosition, _direction);
+            var horse = new Horse(initialPosition);        
+            var possibleOutcomes = horse.GetPossiblePositions(_direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
@@ -91,9 +98,9 @@ namespace Chess.Domain.Tests
         [InlineData("G1", 5, "H1,H2,G2,F2,F1")]
         public void King_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
         {
-            var king = new King();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = king.GetPossiblePositions(initialPosition, _direction);
+            var king = new King(initialPosition);
+            var possibleOutcomes = king.GetPossiblePositions(_direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
@@ -105,9 +112,9 @@ namespace Chess.Domain.Tests
         [InlineData("D4", 27, "A4,B4,C4,E4,F4,G4,H4,D1,D2,D3,D5,D6,D7,D8,A1,B2,C3,E5,F6,G7,H8,G1,F2,E3,C5,B6,A7")]
         public void Queen_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
         {
-            var queen = new Queen();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = queen.GetPossiblePositions(initialPosition, _direction);
+            var queen = new Queen(initialPosition);
+            var possibleOutcomes = queen.GetPossiblePositions(_direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
@@ -119,9 +126,9 @@ namespace Chess.Domain.Tests
         [InlineData("D4", 14, "A4,B4,C4,E4,F4,G4,H4,D1,D2,D3,D5,D6,D7,D8")]
         public void Rook_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
         {
-            var rook = new Rook();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = rook.GetPossiblePositions(initialPosition, _direction);
+            var rook = new Rook(initialPosition);
+            var possibleOutcomes = rook.GetPossiblePositions(_direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);
@@ -133,9 +140,9 @@ namespace Chess.Domain.Tests
         [InlineData("D4", 13, "A1,B2,C3,E5,F6,G7,H8,G1,F2,E3,C5,B6,A7")]
         public void Bishop_given_valid_coordinates_should_move_to_valid_co_ordinates(string initialCellPosition, int expectedOutcomesCount, string expectedOutcomesStr)
         {
-            var bishop = new Bishop();
             var initialPosition = new Position(initialCellPosition);
-            var possibleOutcomes = bishop.GetPossiblePositions(initialPosition, _direction);
+            var bishop = new Bishop(initialPosition);
+            var possibleOutcomes = bishop.GetPossiblePositions(_direction);
             possibleOutcomes.Count.Should().Be(expectedOutcomesCount);
             var positions = possibleOutcomes.Select(x => x.CellPosition).ToList();
             var expectedPossibleOutcomes = expectedOutcomesStr.Split(",", StringSplitOptions.RemoveEmptyEntries);

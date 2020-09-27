@@ -4,6 +4,10 @@ namespace Chess.Domain
 {
     public class King : Piece
     {
+        public King(Position position) : base(position)
+        {
+        }
+
         public override string Name => ChessPieces.King.ToString();
         /// <summary>
         /// This gives possible movements of King.
@@ -11,17 +15,17 @@ namespace Chess.Domain
         /// </summary>
         /// <param name="initialPosition"></param>
         /// <returns></returns>
-        public override List<Position> GetPossiblePositions(Position initialPosition, IDirection direction)
+        public override List<Position> GetPossiblePositions(IDirection direction)
         {
             var possibleOutcomes = new List<Position>();
-            possibleOutcomes.AddRange(direction.GetEastPositions(initialPosition, 1));
-            possibleOutcomes.AddRange(direction.GetWestPositions(initialPosition, 1));
-            possibleOutcomes.AddRange(direction.GetNorthPositions(initialPosition, 1));
-            possibleOutcomes.AddRange(direction.GetSouthPositions(initialPosition, 1));
-            possibleOutcomes.AddRange(direction.GetNorthEastPositions(initialPosition, 1));
-            possibleOutcomes.AddRange(direction.GetNorthWestPositions(initialPosition, 1));
-            possibleOutcomes.AddRange(direction.GetSouthEastPositions(initialPosition, 1));
-            possibleOutcomes.AddRange(direction.GetSouthWestPositions(initialPosition, 1));
+            possibleOutcomes.AddRange(direction.GetEastPositions(CurrentPosition, 1));
+            possibleOutcomes.AddRange(direction.GetWestPositions(CurrentPosition, 1));
+            possibleOutcomes.AddRange(direction.GetNorthPositions(CurrentPosition, 1));
+            possibleOutcomes.AddRange(direction.GetSouthPositions(CurrentPosition, 1));
+            possibleOutcomes.AddRange(direction.GetNorthEastPositions(CurrentPosition, 1));
+            possibleOutcomes.AddRange(direction.GetNorthWestPositions(CurrentPosition, 1));
+            possibleOutcomes.AddRange(direction.GetSouthEastPositions(CurrentPosition, 1));
+            possibleOutcomes.AddRange(direction.GetSouthWestPositions(CurrentPosition, 1));
             return possibleOutcomes;
         }
     }
