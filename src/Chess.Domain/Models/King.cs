@@ -4,7 +4,7 @@ namespace Chess.Domain
 {
     public class King : Piece
     {
-        public King(Position position) : base(position)
+        public King(Position position, PieceColours pieceColor) : base(position, pieceColor)
         {
         }
 

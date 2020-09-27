@@ -4,7 +4,7 @@ namespace Chess.Domain
 {
     public class Bishop : Piece
     {
-        public Bishop(Position position) : base(position)
+        public Bishop(Position position, PieceColours pieceColor) : base(position, pieceColor)
         {
         }
 

@@ -39,8 +39,12 @@ Input	– “Horse	E3”
 Output	– “G4,	F5,	D5,	C4,	C2,	D1,	F1”
 
 **Assumption:**
-- Assume	that	the	board	is	empty.	This	means	that	the	pawn	cannot	move	
-diagonally.
+- Assume	that	the	board	is	empty.	This	means	that	the	pawn	cannot	move	diagonally.
+- Going with the assumption that all pieces are default of white colour. Although for all the pieces expect pawn color doesn't change the outcome
+but in case of pawn if it is considered white, it can only move from A to H that is, in North direction.
 
- - Since Pawn can move only forward,  we can assume it has started from B Row (he was placed on A row's side and moving towards H)
+**External Libraries used**
+- structuremap for DI
+
+ 
 

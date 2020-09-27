@@ -14,25 +14,26 @@ namespace Chess.Application
                 throw new BadRequestException($"The piece type {chessPiecePositionRequest.PieceName} does not exist in the context of chase");
 
             var position = new Position(chessPiecePositionRequest.InitialPosition);
+            //Create piece with default white colour
             switch (chessPiece)
             {
                 case ChessPieces.Pawn:
-                    return new Pawn(position);
+                    return new Pawn(position, PieceColours.White);
 
                 case ChessPieces.King:
-                    return new King(position);
+                    return new King(position, PieceColours.White);
 
                 case ChessPieces.Queen:
-                    return new Queen(position);
+                    return new Queen(position, PieceColours.White);
 
                 case ChessPieces.Rook:
-                    return new Rook(position);
+                    return new Rook(position, PieceColours.White);
 
                 case ChessPieces.Bishop:
-                    return new Bishop(position);
+                    return new Bishop(position, PieceColours.White);
 
                 case ChessPieces.Horse:
-                    return new Horse(position);
+                    return new Horse(position, PieceColours.White);
                 default:
                     throw new InvalidCastException($"{chessPiece.ToString()} is not implemented.");
             }

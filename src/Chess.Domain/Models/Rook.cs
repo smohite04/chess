@@ -4,7 +4,7 @@ namespace Chess.Domain
 {
     public class Rook : Piece
     {
-        public Rook(Position position) : base(position)
+        public Rook(Position position, PieceColours pieceColor) : base(position, pieceColor)
         {
         }
 
